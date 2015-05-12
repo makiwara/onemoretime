@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <title>Authorisation complete</title>
+        <script>
+            if (window.opener)
+                window.opener.API.onAuth({
+                    success: {% if request.user.is_authenticated %}true{% else %}false{% endif %},
+                    name: '{{ request.user.get_full_name }}',
+                    id: '{{ request.user.username }}',
+                    userpic: '{{ request.user.get_userpic }}',
+                    email: '{{ request.user.email }}',
+                    data: '{{ request.user.level_data }}'
+                });
+            window.close();
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
